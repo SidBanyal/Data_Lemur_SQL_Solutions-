@@ -1,0 +1,15 @@
+
+# Solution 1
+
+SELECT t1.page_id 
+FROM pages t1
+LEFT JOIN page_likes t2
+ON t1.page_id = t2.page_id
+WHERE liked_date IS NULL
+ORDER BY 1
+
+#Alternate Solution
+SELECT page_id
+FROM pages
+WHERE page_id NOT IN (SELECT page_id FROM page_likes)
+ORDER BY 1
