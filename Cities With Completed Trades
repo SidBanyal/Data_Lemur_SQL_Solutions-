@@ -1,0 +1,7 @@
+SELECT city, count(city)
+FROM trades t1
+LEFT JOIN users t2
+ON t1.user_id= t2.user_id
+WHERE status='Completed'
+GROUP BY 1 ORDER BY 2 DESC
+LIMIT 3
