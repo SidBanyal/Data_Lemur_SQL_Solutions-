@@ -1,0 +1,14 @@
+WITH top5artist AS
+(
+SELECT a.artist_name, COUNT(gsr.rank) AS rank_count,
+DENSE_RANK() OVER (ORDER BY COUNT(a.artist_name) DESC) AS artist_rank
+FROM artists a
+INNER JOIN songs s ON a.artist_id = s.artist_id
+INNER JOIN global_song_rank gsr ON s.song_id = gsr.song_id
+WHERE gsr.rank <=10
+GROUP BY a.artist_name
+ORDER BY rank_count DESC, artist_name ASC
+)
+
+SELECT artist_name, artist_rank FROM top5artist
+WHERE artist_rank <=5;
