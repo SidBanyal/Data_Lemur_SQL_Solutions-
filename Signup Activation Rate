@@ -1,0 +1,3 @@
+SELECT ROUND(SUM((SELECT COUNT(*) FROM texts WHERE signup_action='Confirmed'))/ 
+SUM((SELECT COUNT(*) FROM texts)),2) AS confirm_rate
+FROM texts;
