@@ -1,0 +1,9 @@
+with vir_tab as(
+SELECT manufacturer, drug, units_sold,
+RANK() OVER(PARTITION BY manufacturer ORDER BY units_sold DESC) as drug_rank
+FROM pharmacy_sales
+)
+
+SELECT manufacturer,drug as top_drug
+FROM vir_tab
+WHERE drug_rank<3
