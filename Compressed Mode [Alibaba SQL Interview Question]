@@ -1,0 +1,5 @@
+SELECT item_count AS mode FROM
+items_per_order as item_count
+WHERE order_occurrences IN (
+SELECT MODE() WITHIN GROUP (ORDER BY order_occurrences DESC) as mode
+from items_per_order);
