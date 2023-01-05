@@ -1,0 +1,11 @@
+
+WITH vir_tab as (
+SELECT card_name, issued_amount,issue_month, issue_year,
+row_number() over( PARTITION BY card_name ORDER BY issue_year,issue_month) as rank_1
+FROM monthly_cards_issued
+)
+
+
+SELECT card_name,issued_amount FROM vir_tab
+WHERE rank_1 = 1
+ORDER BY 2 desc
