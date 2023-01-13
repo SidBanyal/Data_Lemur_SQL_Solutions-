@@ -1,0 +1,12 @@
+with vir_tab as (
+SELECT max(a.salary) as max_sal,a.department_id,b.department
+FROM db_employee a
+LEFT JOIN db_dept b
+ON a.department_id=b.id
+GROUP BY a.department_id
+)
+
+SELECT (SELECT max_sal from vir_tab
+WHERE department='marketing') -
+(SELECT max_sal from vir_tab
+WHERE department='engineering') as sal_diff
